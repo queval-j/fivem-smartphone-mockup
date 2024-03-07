@@ -1,12 +1,18 @@
 const { SendJSON, NewUUID, GetBody } = require('../utils');
 
-const Notes = [];
+const Notes = [{
+    title: 'test',
+    content: 'test\n\nHello',
+    id: 'a0fa6023-ca81-4150-b416-767b5d6e58d9',
+    createdAt: '2024-03-05T17:42:27.427Z',
+    updatedAt: '2024-03-05T17:42:27.427Z'
+  }];
 
 exports.Controller = (app) => {
-    app.post('/note-mod-list', (req, res) => {
+    app.post('/api-note-list', (req, res) => {
         SendJSON(req, res, {data: Notes})
     });
-    app.post('/note-mod-add', (req, res) => {
+    app.post('/api-note-new', (req, res) => {
         const reqBody = GetBody(req);
         reqBody.id = NewUUID();
         reqBody.createdAt = new Date().toISOString();
@@ -14,7 +20,7 @@ exports.Controller = (app) => {
         Notes.push(reqBody);
         SendJSON(req, res, {data: reqBody})
     });
-    app.post('/note-mod-update', (req, res) => {
+    app.post('/api-note-update', (req, res) => {
         const reqBody = GetBody(req);
         const index = Notes.findIndex(note => note.id === reqBody.id);
         if (index !== -1) {
@@ -27,7 +33,7 @@ exports.Controller = (app) => {
         }
         return SendJSON(req, res, { error: { message: 'error-save-note'} })
     });
-    app.post('/note-mod-delete', (req, res) => {
+    app.post('/api-note-delete', (req, res) => {
         const reqBody = GetBody(req);
         const index = Notes.findIndex(note => note.id === reqBody.id);
         let ok = false;
