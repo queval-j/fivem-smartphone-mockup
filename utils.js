@@ -10,4 +10,7 @@ exports.SendJSON = (req, res, body) => {
     })
 }
 
-exports.NewUUID = () => crypto.randomUUID();
+// exports.NewUUID = () => crypto.randomUUID();
+
+let _id = 0;
+exports.GetNewID = () => (++_id);

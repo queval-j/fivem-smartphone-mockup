@@ -1,7 +1,7 @@
-const { SendJSON, NewUUID, GetBody } = require('../utils');
+const { SendJSON, GetBody, GetNewID } = require('../utils');
 
 const CloudAccount = [{
-    id: 'a0fa6023-ca81-4150-b416-767b5d6e58d9',
+    id: GetNewID(),
     playerId: '',
     firstname: '',
     lastname: '', 

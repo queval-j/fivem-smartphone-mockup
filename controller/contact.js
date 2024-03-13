@@ -1,4 +1,4 @@
-const { SendJSON, NewUUID, GetBody } = require('../utils');
+const { SendJSON, GetNewID, GetBody } = require('../utils');
 
 const MyContacts = [];
 
@@ -15,7 +15,7 @@ exports.Controller = (app) => {
             return SendJSON(req, res, { data: contact })
         }
         const newContact = {
-            id: NewUUID(),
+            id: GetNewID(),
             phoneNumber,
             name,
         };

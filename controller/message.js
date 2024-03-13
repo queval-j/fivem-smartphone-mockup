@@ -1,4 +1,4 @@
-const { SendJSON, NewUUID, GetBody } = require('../utils');
+const { SendJSON, GetNewID, GetBody } = require('../utils');
 
 const MyConversation = [];
 const MY_PHONE = '6677862569';
@@ -50,7 +50,7 @@ exports.Controller = (app) => {
                 }
             });
         }
-        conversation = new Conversation(NewUUID());
+        conversation = new Conversation(GetNewID());
         conversation.addPerson({
             phoneNumber,
         });
@@ -74,7 +74,7 @@ exports.Controller = (app) => {
         message.phoneNumber = MY_PHONE;
         const conversation = MyConversation.find(conversation => conversation.id === conversationId);
         if (!conversation) {
-            const conversation = new Conversation(NewUUID());
+            const conversation = new Conversation(GetNewID());
             conversation.addMessage(message);
             MyConversation.push(conversation);
             return SendJSON(req, res, {
@@ -132,7 +132,7 @@ class Conversation {
     addMessage(message) {
         const msg = {
             ...message,
-            id: NewUUID(),
+            id: GetNewID(),
             createdAt: new Date().toISOString(),
         };
         this.messages.push(msg);
@@ -162,8 +162,8 @@ class Conversation {
 }
 
 
-const initConv = new Conversation(NewUUID());
-initConv.id = 'd3c533df-382f-41d9-903e-2ada0d53751d';
+const initConv = new Conversation(GetNewID());
+initConv.id = 1;
 initConv.addPerson({
     phoneNumber: '9998887777',
 })

@@ -1,9 +1,9 @@
-const { SendJSON, NewUUID, GetBody } = require('../utils');
+const { SendJSON, GetBody, GetNewID } = require('../utils');
 
 const Notes = [{
     title: 'test',
     content: 'test\n\nHello',
-    id: 'a0fa6023-ca81-4150-b416-767b5d6e58d9',
+    id: GetNewID(),
     createdAt: '2024-03-05T17:42:27.427Z',
     updatedAt: '2024-03-05T17:42:27.427Z'
   }];
@@ -14,7 +14,7 @@ exports.Controller = (app) => {
     });
     app.post('/api-note-new', (req, res) => {
         const reqBody = GetBody(req);
-        reqBody.id = NewUUID();
+        reqBody.id = GetNewID();
         reqBody.createdAt = new Date().toISOString();
         reqBody.updatedAt = new Date().toISOString();
         Notes.push(reqBody);
