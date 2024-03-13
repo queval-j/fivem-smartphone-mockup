@@ -3,6 +3,7 @@ const PhoneCallController = require('./phone_call').Controller;
 const MessageController = require('./message').Controller;
 const ContactController = require('./contact').Controller;
 const CloudAccountController = require('./cloud-account').Controller;
+const SystemController = require('./system').Controller;
 
 exports.Controller = (app) => {
     NoteController(app);
@@ -10,4 +11,5 @@ exports.Controller = (app) => {
     MessageController(app);
     ContactController(app);
     CloudAccountController(app);
+    SystemController(app);
 };
