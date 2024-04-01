@@ -33,7 +33,7 @@ exports.Controller = (app) => {
 
     app.post('/api-message-conversation-new', (req, res) => {
         const reqBody = GetBody(req);
-        const { phoneNumber, messageContent } = reqBody;
+        const { phoneNumber, messageContent, messageType } = reqBody;
         let conversation = MyConversation.find(conversation =>
             conversation.people.find(person => person.phoneNumber === phoneNumber)
             && conversation.people.length === 1
@@ -42,6 +42,7 @@ exports.Controller = (app) => {
             const message = conversation.addMessage({
                 phoneNumber: MY_PHONE,
                 content: messageContent,
+                type: messageType,
             });
             return SendJSON(req, res, {
                 data: {
@@ -57,6 +58,7 @@ exports.Controller = (app) => {
         const message = conversation.addMessage({
             phoneNumber: MY_PHONE,
             content: messageContent,
+            type: messageType,
         });
         MyConversation.push(conversation);
         return SendJSON(req, res, {
@@ -132,6 +134,7 @@ class Conversation {
     addMessage(message) {
         const msg = {
             ...message,
+            type: message.type || 'text',
             id: GetNewID(),
             createdAt: new Date().toISOString(),
         };
@@ -167,4 +170,18 @@ initConv.id = 1;
 initConv.addPerson({
     phoneNumber: '9998887777',
 })
+initConv.addMessage({
+    phoneNumber: '9998887777',
+    content: 'Hello there!'
+});
+initConv.addMessage({
+    phoneNumber: '9998887777',
+    type: 'image',
+    content: 'https://r2.fivemanage.com/images/9YDvU1p0QzwK.jpg'
+});
+initConv.addMessage({
+    phoneNumber: '6677862569',
+    type: 'image',
+    content: 'https://r2.fivemanage.com/images/9YDvU1p0QzwK.jpg'
+});
 MyConversation.push(initConv);
