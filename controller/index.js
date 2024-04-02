@@ -5,6 +5,7 @@ const MessageController = require('./message').Controller;
 const ContactController = require('./contact').Controller;
 const CloudAccountController = require('./cloud-account').Controller;
 const SystemController = require('./system').Controller;
+const WeatherController = require('./weather').Controller;
 
 exports.Controller = (app) => {
     NoteController(app);
@@ -14,4 +15,5 @@ exports.Controller = (app) => {
     ContactController(app);
     CloudAccountController(app);
     SystemController(app);
+    WeatherController(app);
 };
