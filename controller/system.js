@@ -31,12 +31,22 @@ const PhoneConfiguration = {
                 enabled: false,
             },
         }
+    },
+    photoApp: {
+        uploadProvider: 'versescripts',
+        config: {}
     }
 };
 
 exports.Controller = (app) => {
     // Phone
     app.post('/api-system-phone-configuration', (req, res) => {
+        SendJSON(req, res, {
+            data: PhoneConfiguration,
+        })
+    })
+    // Phone
+    app.post('/api-system-phone-configuration-set', (req, res) => {
         SendJSON(req, res, {
             data: PhoneConfiguration,
         })
