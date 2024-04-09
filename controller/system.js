@@ -51,4 +51,10 @@ exports.Controller = (app) => {
             data: PhoneConfiguration,
         })
     })
+
+    app.post('/api-settings-get-my-settings', (req, res) => {
+        SendJSON(req, res, {
+            data: {},
+        })
+    });
 }
